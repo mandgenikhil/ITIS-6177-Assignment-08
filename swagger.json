@@ -1,0 +1,173 @@
+
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Agent API Documentation",
+    "description": "Agent Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "143.198.126.111:3003",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Agnets",
+      "description": "API for agents in the system"
+    }
+  ],
+  "schemes": ["http"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  
+    "paths": {
+      "/agent": {
+        "get": {
+          "tags": ["Agents"],
+          "summary": "Get all agents in system",
+          "responses": {
+            "200": {
+              "description": "OK",
+              "schema": {
+                "$ref": "#/definitions/Agents"
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": ["Agents"],
+          "description": "Create new agent in system",
+          "parameters": [
+            {
+              "name": "agent",
+              "in": "body",
+              "description": "Agent that we want to create",
+              "schema": {
+                "$ref": "#/definitions/Agent"
+              }
+            }
+          ],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "New agent is created",
+              "schema": {
+                "$ref": "#/definitions/Agent"
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update agent with email address",
+          "tags": ["Agents"],
+          "parameters": [
+            {
+              "name": "agent",
+              "in": "body",
+              "description": "Agent with new values of properties",
+              "schema": {
+                "$ref": "#/definitions/UpdateAgent"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Agent is updated",
+              "parameters": [
+                {
+                  "name": "agent",
+                  "in": "body",
+                  "description": "Delete agent with emailaddress",
+                  "schema": {
+                    "$ref": "#/definitions/DeleteAgent"
+                  }
+                }
+              ],
+              "schema": {
+                "$ref": "#/definitions/Agent"
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete agent with given agent name and  agent emailAddress",
+          "tags": ["Agent"],
+          "parameters": [
+            {
+              "name": "agent",
+              "in": "body",
+              "description": "Agent is deleted",
+              "schema": {
+                "$ref": "#/definitions/DeleteAgent"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Agent is deleted"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "Agent": {
+        "required": ["AGENT_NAME", "AGENT_EMAIL"],
+        "properties": {
+          "AGENT_EMAIL": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "AGENT_NAME": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "WORKING_AREA": {
+            "type": "string",
+            "uniqueItems": false
+          }
+        }
+      },
+      "UpdateAgent": {
+        "required": ["AGENT_NAME", "AGENT_EMAIL","NEW_AGENT_EMAIL"],
+        "properties": {
+          "AGENT_EMAIL": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "NEW_AGENT_EMAIL": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "AGENT_NAME": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "WORKING_AREA": {
+            "type": "string",
+            "uniqueItems": false
+          }
+        }
+      },
+      "DeleteAgent": {
+        "required": ["AGENT_EMAIL","AGENT_NAME"],
+        "properties": {
+          "AGENT_NAME": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "AGENT_EMAIL": {
+            "type": "string",
+            "uniqueItems": true
+          }
+        }
+      },
+      "Agents": {
+        "type": "array",
+        "$ref": "#/definitions/Agent"
+      }
+    }  
+}
+
