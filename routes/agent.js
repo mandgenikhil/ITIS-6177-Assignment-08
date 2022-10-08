@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../helpers/databse');
+const pool = require("../helpers/databse");
 const { body, validationResult } = require('express-validator');
 
 const {

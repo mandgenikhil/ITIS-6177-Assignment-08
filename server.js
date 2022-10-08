@@ -55,22 +55,22 @@ app.get('/', (request, response) => {
 
 // Routes
 
-const customerRouter = require('../routes/customer');
+const customerRouter = require("./routes/customer");
 
 app.use('/customer',customerRouter);
 //app.use('/customer',routes.customer);
 
-const agentRouter = require('../routes/agent');
+const agentRouter = require('./routes/agent');
 app.use('/agent',agentRouter);
 
-const companyRouter = require('../routes/company');
+const companyRouter = require('./routes/company');
 app.use('/company',companyRouter);
 
-const studentRouter = require('../routes/student');
+const studentRouter = require('./routes/student');
 app.use('/student',studentRouter);
 
 
-const say = require('../routes/say');
+const say = require('./routes/say');
 app.use('/say',say);
 
 
