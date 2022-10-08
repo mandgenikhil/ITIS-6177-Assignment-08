@@ -10,11 +10,11 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "143.198.126.111:3003",
+  "host": "143.198.126.111:3002",
   "basePath": "/",
   "tags": [
     {
-      "name": "Agnets",
+      "name": "Agents",
       "description": "API for agents in the system"
     }
   ],
@@ -38,7 +38,7 @@
         },
         "post": {
           "tags": ["Agents"],
-          "description": "Create new agent in system",
+          "summary": "Create new agent in system",
           "parameters": [
             {
               "name": "agent",
@@ -91,9 +91,41 @@
             }
           }
         },
+        "patch": {
+          "summary": "Update agent with Working area",
+          "tags": ["Agents"],
+          "parameters": [
+            {
+              "name": "agent",
+              "in": "body",
+              "description": "Agent with few update values of properties",
+              "schema": {
+                "$ref": "#/definitions/PatchAgent"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Agent is updated",
+              "parameters": [
+                {
+                  "name": "agent",
+                  "in": "body",
+                  "description": "Agent value with emailaddress",
+                  "schema": {
+                    "$ref": "#/definitions/PatchAgent"
+                  }
+                }
+              ],
+              "schema": {
+                "$ref": "#/definitions/Agent"
+              }
+            }
+          }
+        },
         "delete": {
+          "tags": ["Agents"],
           "summary": "Delete agent with given agent name and  agent emailAddress",
-          "tags": ["Agent"],
           "parameters": [
             {
               "name": "agent",
@@ -148,6 +180,23 @@
           "WORKING_AREA": {
             "type": "string",
             "uniqueItems": false
+          }
+        }
+      },
+      "PatchAgent": {
+        "required": ["AGENT_NAME", "WORKING_AREA","AGENT_EMAIL"],
+        "properties": {
+          "AGENT_EMAIL": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "AGENT_NAME": {
+            "type": "string",
+            "uniqueItems": true
+          },
+          "WORKING_AREA": {
+            "type": "string",
+            "uniqueItems": true
           }
         }
       },

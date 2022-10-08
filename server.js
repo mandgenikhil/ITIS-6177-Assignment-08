@@ -2,7 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
-const swaggerDocument = require('../swagger.json');
+const swaggerDocument = require('./swagger.json');
 const app = express();
 //const routes = require('routes');
 //const customerRoute = require('./routes/customer')
@@ -12,22 +12,22 @@ dotenv.config({path: '.env-local'});
 const PORT = process.env.PORT || '3001';
 
 //
-// const swaggerOptions = {
-//     swaggerDefinition :{
-//         info:{
-//             title:"Agent API",
-//             description:"Agent API Information",
-//             contact : {
-//                 name : "Nikhil Mandge (nmandge@uncc.edu)"
-//             },
-//             servers:[`http://localhost:${PORT}`]
+const swaggerOptions = {
+    swaggerDefinition :{
+        info:{
+            title:"API",
+            description:"Below API's",
+            contact : {
+                name : "Nikhil Mandge (nmandge@uncc.edu)"
+            },
+            servers:[`http://localhost:${PORT}`]
 
-//         }
-//     },
-//     //
-//     apis:["./routes/*.js"]
+        }
+    },
+    //
+    apis:["./routes/*.js"]
 
-// };
+};
 
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
@@ -68,6 +68,10 @@ app.use('/company',companyRouter);
 
 const studentRouter = require('../routes/student');
 app.use('/student',studentRouter);
+
+
+const say = require('../routes/say');
+app.use('/say',say);
 
 
 /**Start listening */
